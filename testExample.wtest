@@ -1,9 +1,55 @@
-import example.pepita
+import kinesiologia.*
 
 describe "group of tests for pepita" {
 
-  test "pepita has initial energy" {
-    assert.equals(100, pepita.energy())
+  const leonardo=new Paciente(edad=40,fortalezaMuscular=20,nivelDeDolor=10)
+  const milena=new Paciente(edad=3,fortalezaMuscular=50,nivelDeDolor=30)
+  const minitramp=new Minitramp()
+  const magneto=new Magneto()
+  const bicicleta=new Bicicleta()
+
+  test "leonardo puede usar minitramp" {
+    assert.that(leonardo.puedeUsar(minitramp))
   }
 
+  test "leonardo puede usar bicicleta" {
+    assert.that(leonardo.puedeUsar(bicicleta))
+  }
+
+  test "leonardo no puede usar magneto" {
+    assert.that(leonardo.puedeUsar(magneto))
+  }
+
+  test "milena no puede usar minitramp" {
+    assert.notThat(milena.puedeUsar(minitramp))
+  }
+
+  test "milena puede usar bicicleta" {
+    assert.notThat(milena.puedeUsar(bicicleta))
+  }
+
+  test "milena puede usar magneto" {
+    assert.that(milena.puedeUsar(magneto))
+  }
+
+  test "Después de usar el magneto una vez, el nivel de dolor de Leonardo baja a 9" {
+    leonardo.usar(magneto)
+    assert.equals(9, leonardo.nivelDeDolor())
+  }
+  test "Después de usar el magneto una vez, el nivel de dolor de milena baja a 27" {
+    milena.usar(magneto)
+    assert.equals(27, milena.nivelDeDolor())
+  }
+
+  test "Después de usar la bicicleta nivel de dolor de Leonardo baja a 6, y la fortaleza sube a 23." {
+
+    leonardo.usar(bicicleta)
+    assert.equals(6, leonardo.nivelDeDolor())
+    assert.equals(23, leonardo.fortalezaMuscular())
+  }
+
+  test "Después de usar el minitramp una vez, la fortaleza de Leonardo sube a 24." {
+    leonardo.usar(minitramp)
+    assert.equals(24, leonardo.fortalezaMuscular())
+  }
 }
