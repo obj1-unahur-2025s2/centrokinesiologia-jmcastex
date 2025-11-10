@@ -53,3 +53,38 @@ describe "group of tests for pepita" {
     assert.equals(24, leonardo.fortalezaMuscular())
   }
 }
+
+describe "centro de kinesiologia" {
+
+  const leonardo=new Paciente(edad=40,fortalezaMuscular=20,nivelDeDolor=10)
+  const milena=new Paciente(edad=3,fortalezaMuscular=50,nivelDeDolor=30)
+  const minitramp=new Minitramp()
+  const magneto=new Magneto()
+  const bicicleta=new Bicicleta()
+
+   method initialize(){
+      leonardo.agregarRutina(bicicleta)
+      leonardo.agregarRutina(minitramp)
+      leonardo.agregarRutina(bicicleta)
+      leonardo.agregarRutina(magneto)
+      milena.agregarRutina(magneto)
+      milena.agregarRutina(bicicleta)
+    }
+
+  test "Leonardo puede hacer la rutina que tiene asignada" {
+
+    assert.that(centro.puedeRealizarRutina(leonardo))  
+  }
+
+
+  test "Después de hacer la rutina una vez leonardo, su nivel de dolor baja a 1.8, y su fortaleza sube a 30" {
+    leonardo.realizarSesion()
+    assert.equals(30, leonardo.fortalezaMuscular())
+    assert.equals(1.8, leonardo.nivelDeDolor())
+  }
+
+  test "milena no puede hacer la rutina que tiene asignada" {
+
+    assert.notThat(centro.puedeRealizarRutina(milena))  
+  }
+}
